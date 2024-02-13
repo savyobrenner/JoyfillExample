@@ -10,6 +10,20 @@ import UIKit
 
 class DocumentViewController: UIViewController {
     
+    private lazy var saveButton: UIButton = {
+        var config = UIButton.Configuration.filled()
+        config.title = "Save"
+        config.baseBackgroundColor = .systemBlue.withAlphaComponent(0.08)
+        config.baseForegroundColor = .systemBlue
+        config.buttonSize = .medium
+        config.cornerStyle = .medium
+        
+        let button = UIButton(configuration: config)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
     var viewModel: DocumentViewModelProtocol
     
     init(viewModel: DocumentViewModelProtocol) {
@@ -30,21 +44,13 @@ class DocumentViewController: UIViewController {
 
 // MARK: - Joyfill Delegate
 extension DocumentViewController: onChange {
-    func handleImageUploadAsync(images: [String]) {
-        
-    }
+    func handleImageUploadAsync(images: [String]) { }
     
-    func handleOnBlur(blurAndFocusParams: [String : Any]) {
-        
-    }
+    func handleOnBlur(blurAndFocusParams: [String : Any]) { }
     
-    func handleOnFocus(blurAndFocusParams: [String : Any]) {
-        
-    }
+    func handleOnFocus(blurAndFocusParams: [String : Any]) { }
     
-    func handleOnChange(docChangelog: [String : Any], doc: [String : Any]) {
-        
-    }
+    func handleOnChange(docChangelog: [String : Any], doc: [String : Any]) { }
     
 }
 
@@ -69,7 +75,7 @@ private extension DocumentViewController {
                     joyfillForm.topAnchor.constraint(equalTo: self.view.topAnchor, constant: -12),
                     joyfillForm.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
                     joyfillForm.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-                    joyfillForm.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0)
+                    joyfillForm.bottomAnchor.constraint(equalTo: self.saveButton.topAnchor, constant: -10)
                 ])
                 
                 joyfillFormImageUpload = {
@@ -81,9 +87,30 @@ private extension DocumentViewController {
     
     func setupView() {
         viewModel.getDocument()
+        setupSaveButton()
+        
+        navigationController?.navigationBar.prefersLargeTitles = false
+        view.backgroundColor = .white
         
         if let navigationController {
             joyfillNavigationController = navigationController
         }
+    }
+    
+    func setupSaveButton() {
+        view.addSubview(saveButton)
+        
+        NSLayoutConstraint.activate([
+            saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            saveButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            saveButton.heightAnchor.constraint(equalToConstant: 40)
+        ])
+        
+        saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func saveButtonTapped() {
+        
     }
 }
