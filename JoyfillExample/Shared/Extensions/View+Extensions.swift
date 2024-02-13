@@ -25,9 +25,11 @@ extension UIView {
     }
     
     func hideLoading() {
-        if let activityIndicator = self.viewWithTag(1) as? UIActivityIndicatorView {
-            activityIndicator.stopAnimating()
-            activityIndicator.removeFromSuperview()
+        DispatchQueue.main.async {
+            if let activityIndicator = self.viewWithTag(1) as? UIActivityIndicatorView {
+                activityIndicator.stopAnimating()
+                activityIndicator.removeFromSuperview()
+            }
         }
     }
 }

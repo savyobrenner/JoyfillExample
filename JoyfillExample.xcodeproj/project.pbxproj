@@ -14,9 +14,9 @@
 		F81631C32B7BF6EA003692ED /* DocumentServicesProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81631C22B7BF6EA003692ED /* DocumentServicesProtocol.swift */; };
 		F81631C52B7BF6F0003692ED /* DocumentServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81631C42B7BF6F0003692ED /* DocumentServices.swift */; };
 		F81631C72B7BF790003692ED /* DocumentEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81631C62B7BF790003692ED /* DocumentEndpoint.swift */; };
-		F81631C92B7C05BB003692ED /* AnyDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81631C82B7C05BB003692ED /* AnyDecodable.swift */; };
 		F81631CC2B7C10CD003692ED /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81631CB2B7C10CD003692ED /* View+Extensions.swift */; };
 		F81631CE2B7C110F003692ED /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81631CD2B7C110F003692ED /* UIViewController+Extensions.swift */; };
+		F81631D02B7C17EA003692ED /* ExportPDFModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81631CF2B7C17EA003692ED /* ExportPDFModel.swift */; };
 		F83723602B79846F00122E30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F837235F2B79846F00122E30 /* AppDelegate.swift */; };
 		F83723622B79846F00122E30 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83723612B79846F00122E30 /* SceneDelegate.swift */; };
 		F83723642B79846F00122E30 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83723632B79846F00122E30 /* HomeViewController.swift */; };
@@ -47,9 +47,9 @@
 		F81631C22B7BF6EA003692ED /* DocumentServicesProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentServicesProtocol.swift; sourceTree = "<group>"; };
 		F81631C42B7BF6F0003692ED /* DocumentServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentServices.swift; sourceTree = "<group>"; };
 		F81631C62B7BF790003692ED /* DocumentEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentEndpoint.swift; sourceTree = "<group>"; };
-		F81631C82B7C05BB003692ED /* AnyDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyDecodable.swift; sourceTree = "<group>"; };
 		F81631CB2B7C10CD003692ED /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		F81631CD2B7C110F003692ED /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		F81631CF2B7C17EA003692ED /* ExportPDFModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportPDFModel.swift; sourceTree = "<group>"; };
 		F837235C2B79846F00122E30 /* JoyfillExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JoyfillExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F837235F2B79846F00122E30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F83723612B79846F00122E30 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -277,7 +277,7 @@
 			children = (
 				F841D8CF2B7AD58600401E50 /* Component.swift */,
 				F841D8D12B7AD59C00401E50 /* ComponentList.swift */,
-				F81631C82B7C05BB003692ED /* AnyDecodable.swift */,
+				F81631CF2B7C17EA003692ED /* ExportPDFModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -401,6 +401,7 @@
 				F81631C52B7BF6F0003692ED /* DocumentServices.swift in Sources */,
 				F81631BE2B7BF68E003692ED /* DocumentViewModelProtocol.swift in Sources */,
 				F841D8DB2B7AD8C100401E50 /* HomeServicesProtocol.swift in Sources */,
+				F81631D02B7C17EA003692ED /* ExportPDFModel.swift in Sources */,
 				F81631BA2B7BF2E6003692ED /* DocumentViewController.swift in Sources */,
 				F841D8BB2B7AC7BF00401E50 /* NetworkProtocol.swift in Sources */,
 				F841D8E22B7ADDD700401E50 /* HomeViewCell.swift in Sources */,
@@ -414,7 +415,6 @@
 				F841D8C62B7ACBFB00401E50 /* HttpMethod.swift in Sources */,
 				F841D8C92B7ACC5900401E50 /* AppEnvironment.swift in Sources */,
 				F841D8BD2B7AC8A000401E50 /* NetworkManager.swift in Sources */,
-				F81631C92B7C05BB003692ED /* AnyDecodable.swift in Sources */,
 				F83723602B79846F00122E30 /* AppDelegate.swift in Sources */,
 				F841D8CC2B7ACF5100401E50 /* HomeEndpoint.swift in Sources */,
 				F81631CE2B7C110F003692ED /* UIViewController+Extensions.swift in Sources */,

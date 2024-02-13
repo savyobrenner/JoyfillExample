@@ -14,5 +14,6 @@ protocol DocumentServicesProtocol {
         changelogs: Any,
         onCompletion: @escaping (Result<Component, Error>) -> Void
     )
+    func exportDocument(with identifier: String, onCompletion: @escaping (Result<ExportPDFModel, Error>) -> Void)
 }
 

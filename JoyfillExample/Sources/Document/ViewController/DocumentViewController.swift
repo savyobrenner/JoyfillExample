@@ -24,6 +24,29 @@ class DocumentViewController: UIViewController {
         return button
     }()
     
+    private lazy var exportPDFButton: UIButton = {
+        var config = UIButton.Configuration.filled()
+        config.title = "Export PDF"
+        config.baseBackgroundColor = .systemRed.withAlphaComponent(0.08)
+        config.baseForegroundColor = .systemRed
+        config.buttonSize = .medium
+        config.cornerStyle = .medium
+        
+        let button = UIButton(configuration: config)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    private lazy var buttonsStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [saveButton, exportPDFButton])
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.spacing = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     var viewModel: DocumentViewModelProtocol
     
     init(viewModel: DocumentViewModelProtocol) {
@@ -127,7 +150,7 @@ private extension DocumentViewController {
     
     func setupView() {
         viewModel.getDocument()
-        setupSaveButton()
+        setupButtons()
         
         navigationController?.navigationBar.prefersLargeTitles = false
         view.backgroundColor = .white
@@ -137,20 +160,25 @@ private extension DocumentViewController {
         }
     }
     
-    func setupSaveButton() {
-        view.addSubview(saveButton)
+    func setupButtons() {
+        view.addSubview(buttonsStackView)
         
         NSLayoutConstraint.activate([
-            saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            saveButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
-            saveButton.heightAnchor.constraint(equalToConstant: 40)
+            buttonsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            buttonsStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            buttonsStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            buttonsStackView.heightAnchor.constraint(equalToConstant: 40)
         ])
         
         saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
+        exportPDFButton.addTarget(self, action: #selector(exportPDFButtonTapped), for: .touchUpInside)
     }
     
     @objc func saveButtonTapped() {
         viewModel.updateDocument(with: docChangeLogs)
+    }
+    
+    @objc func exportPDFButtonTapped() {
+       
     }
 }

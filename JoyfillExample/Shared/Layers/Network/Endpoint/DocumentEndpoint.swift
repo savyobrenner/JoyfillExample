@@ -10,6 +10,7 @@ import Foundation
 enum DocumentEndpoint {
     case getDocument(id: String)
     case updateDocument(id: String, changelogs: Any)
+    case exportPDF(id: String)
 }
 
 extension DocumentEndpoint: Endpoint {
@@ -23,6 +24,8 @@ extension DocumentEndpoint: Endpoint {
             return "v1/documents/\(id)"
         case let .updateDocument(id, _):
             return "v1/documents/\(id)/changelogs"
+        case let .exportPDF(id):
+            return "v1/documents/\(id)/exports/pdf"
         }
     }
     
@@ -30,7 +33,7 @@ extension DocumentEndpoint: Endpoint {
         switch self {
         case .getDocument:
             return .get
-        case .updateDocument:
+        case .updateDocument, .exportPDF:
             return .post
         }
     }
@@ -39,10 +42,11 @@ extension DocumentEndpoint: Endpoint {
         switch self {
         case .getDocument:
             return .requestPlain
-            
         case let .updateDocument(_, changelogs):
             let jsonData = try? JSONSerialization.data(withJSONObject: changelogs, options: [])
             return .requestBody(body: jsonData)
+        case .exportPDF:
+            return .requestParameters(parameters: ["timezone": "UTC"], encoding: .json)
         }
     }
 }

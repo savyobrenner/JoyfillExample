@@ -33,5 +33,13 @@ final class DocumentServices: DocumentServicesProtocol {
             onCompletion
         )
     }
+    
+    func exportDocument(with identifier: String, onCompletion: @escaping (Result<ExportPDFModel, Error>) -> Void) {
+        network.request(
+            DocumentEndpoint.exportPDF(id: identifier),
+            expectedType: ExportPDFModel.self,
+            onCompletion
+        )
+    }
 }
 
