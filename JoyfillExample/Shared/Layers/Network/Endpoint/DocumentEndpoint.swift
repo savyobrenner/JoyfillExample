@@ -46,7 +46,7 @@ extension DocumentEndpoint: Endpoint {
             let jsonData = try? JSONSerialization.data(withJSONObject: changelogs, options: [])
             return .requestBody(body: jsonData)
         case .exportPDF:
-            return .requestParameters(parameters: ["timezone": "UTC"], encoding: .json)
+            return .requestParameters(parameters: ["timezone": "UTC"], encoding: .url)
         }
     }
 }

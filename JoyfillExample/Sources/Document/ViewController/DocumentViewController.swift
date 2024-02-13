@@ -179,6 +179,6 @@ private extension DocumentViewController {
     }
     
     @objc func exportPDFButtonTapped() {
-       
+        viewModel.exportDocument()
     }
 }

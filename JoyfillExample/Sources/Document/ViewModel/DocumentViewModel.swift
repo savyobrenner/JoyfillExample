@@ -46,6 +46,20 @@ final class DocumentViewModel: DocumentViewModelProtocol {
             }
         }
     }
+    
+    func exportDocument() {
+        loading?(true)
+        services.exportDocument(with: id) { result in
+            self.loading?(false)
+            switch result {
+            case .success(let success):
+                // TODO: - Investigate backend response (500)
+                break
+            case .failure(let failure):
+                self.showAlert?("Error", failure.localizedDescription)
+            }
+        }
+    }
 }
 
 private extension DocumentViewModel {

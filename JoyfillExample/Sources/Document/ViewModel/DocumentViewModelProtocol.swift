@@ -14,4 +14,5 @@ protocol DocumentViewModelProtocol {
     var showAlert: ((String, String) -> Void)? { get set }
     func getDocument()
     func updateDocument(with changelog: Any)
+    func exportDocument()
 }
