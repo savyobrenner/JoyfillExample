@@ -13,6 +13,8 @@ final class DocumentViewModel: DocumentViewModelProtocol {
     var id: String
     
     var loadForm: ((Data) -> Void)?
+    var loading: ((Bool) -> Void)?
+    var showAlert: ((String, String) -> Void)?
     
     init(services: DocumentServicesProtocol, id: String) {
         self.services = services
@@ -20,12 +22,27 @@ final class DocumentViewModel: DocumentViewModelProtocol {
     }
     
     func getDocument() {
+        loading?(true)
         services.getDocument(with: id) { result in
+            self.loading?(false)
             switch result {
             case .success(let success):
                 self.loadForm?(success)
             case .failure(let failure):
-                debugPrint(failure.localizedDescription)
+                self.showAlert("Error", failure.localizedDescription)
+            }
+        }
+    }
+    
+    func updateDocument(with changelog: Any) {
+        loading?(true)
+        services.updateDocument(with: id, changelogs: changelog) { result in
+            self.loading?(false)
+            switch result {
+            case .success:
+                self.showAlert("Success", "Your document has been successfully saved.")
+            case .failure(let failure):
+                self.showAlert("Error", failure.localizedDescription)
             }
         }
     }

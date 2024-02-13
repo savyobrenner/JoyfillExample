@@ -54,13 +54,41 @@ extension DocumentViewController: onChange {
     
 }
 
+// MARK: - UIImagePickerControllerDelegate
+extension DocumentViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func openImagePicker() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+        imagePicker.sourceType = .photoLibrary
+        
+        present(imagePicker, animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        
+        guard let image = info[.editedImage] as? UIImage else { return }
+        
+        if let imageData = image.jpegData(compressionQuality: 1.0) {
+            let base64String = imageData.base64EncodedString()
+            onUploadAsync(imageUrl: "data:image/jpeg;base64,\(base64String)")
+        }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+
 private extension DocumentViewController {
     func bindUI() {
         viewModel.loadForm = { [weak self] in
             guard let self else { return }
             
             jsonData = $0
-
+            
             DispatchQueue.main.async {
                 
                 let joyfillForm = JoyfillForm()
@@ -79,9 +107,21 @@ private extension DocumentViewController {
                 ])
                 
                 joyfillFormImageUpload = {
-                    // TODO: - Get Photos From Gallery
+                    self.openImagePicker()
                 }
             }
+        }
+        
+        viewModel.loading = { [weak self] in
+            if $0 {
+                self?.view.showLoading()
+            } else {
+                self?.view.hideLoading()
+            }
+        }
+        
+        viewModel.showAlert = { [weak self] in
+            self?.showAlert(title: $0, description: $1)
         }
     }
     
@@ -111,6 +151,6 @@ private extension DocumentViewController {
     }
     
     @objc func saveButtonTapped() {
-        
+        viewModel.updateDocument(with: docChangeLogs)
     }
 }

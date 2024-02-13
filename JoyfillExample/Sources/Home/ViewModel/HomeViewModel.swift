@@ -18,23 +18,27 @@ final class HomeViewModel: HomeViewModelProtocol {
     }
     
     var reloadData: (() -> Void)?
+    var loading: ((Bool) -> Void)?
+    var showAlert: ((String, String) -> Void)?
     
     init(services: HomeServicesProtocol) {
         self.services = services
     }
     
     func getDocumentsList() {
+        loading?(true)
         services.getDocumentsList { result in
+            self.loading?(false)
             switch result {
             case .success(let success):
                 if let components = success.data {
                     self.components = components
                 } else {
-                    debugPrint("Failed to get model data")
+                    self.showAlert("Error", "Failed to get model data")
                 }
                 
             case .failure(let failure):
-                debugPrint(failure.localizedDescription)
+                self.showAlert("Error", failure.localizedDescription)
             }
         }
     }

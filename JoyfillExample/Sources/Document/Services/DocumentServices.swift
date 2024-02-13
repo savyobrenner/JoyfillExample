@@ -25,11 +25,11 @@ final class DocumentServices: DocumentServicesProtocol {
     func updateDocument(
         with identifier: String,
         changelogs: Any,
-        onCompletion: @escaping (Result<ComponentList, Error>) -> Void
+        onCompletion: @escaping (Result<Component, Error>) -> Void
     ) {
         network.request(
             DocumentEndpoint.updateDocument(id: identifier, changelogs: changelogs),
-            expectedType: ComponentList.self,
+            expectedType: Component.self,
             onCompletion
         )
     }

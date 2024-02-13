@@ -66,6 +66,18 @@ private extension HomeViewController {
         viewModel.reloadData = { [weak self] in
             self?.homeView.reloadData()
         }
+        
+        viewModel.loading = { [weak self] in
+            if $0 {
+                self?.view.showLoading()
+            } else {
+                self?.view.hideLoading()
+            }
+        }
+        
+        viewModel.showAlert = { [weak self] in
+            self?.showAlert(title: $0, description: $1)
+        }
     }
     
     func fetchData() {
