@@ -29,7 +29,7 @@ final class DocumentViewModel: DocumentViewModelProtocol {
             case .success(let success):
                 self.loadForm?(success)
             case .failure(let failure):
-                self.showAlert("Error", failure.localizedDescription)
+                self.showAlert?("Error", failure.localizedDescription)
             }
         }
     }
@@ -40,9 +40,9 @@ final class DocumentViewModel: DocumentViewModelProtocol {
             self.loading?(false)
             switch result {
             case .success:
-                self.showAlert("Success", "Your document has been successfully saved.")
+                self.showAlert?("Success", "Your document has been successfully saved.")
             case .failure(let failure):
-                self.showAlert("Error", failure.localizedDescription)
+                self.showAlert?("Error", failure.localizedDescription)
             }
         }
     }

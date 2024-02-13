@@ -34,11 +34,11 @@ final class HomeViewModel: HomeViewModelProtocol {
                 if let components = success.data {
                     self.components = components
                 } else {
-                    self.showAlert("Error", "Failed to get model data")
+                    self.showAlert?("Error", "Failed to get model data")
                 }
                 
             case .failure(let failure):
-                self.showAlert("Error", failure.localizedDescription)
+                self.showAlert?("Error", failure.localizedDescription)
             }
         }
     }
